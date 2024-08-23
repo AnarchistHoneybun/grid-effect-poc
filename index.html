@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bento Grid Focus Effect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, auto);
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 190px;
+        }
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+        }
+        .card:hover .card-content {
+            opacity: 1;
+        }
+        .card h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .customization { background-color: #e0cfff; grid-column: 1; grid-row: 1 / 3; }
+        .scheduling { background-color: #ffb3ba; grid-column: 2 / 4; grid-row: 1; }
+        .wallet { background-color: #baffc9; grid-column: 2; grid-row: 2; }
+        .inbox { background-color: #ffffba; grid-column: 3; grid-row: 2; }
+        .send-gifts { background-color: #ffdfba; grid-column: 1 / 3; grid-row: 3; }
+        .reminders { background-color: #bae1ff; grid-column: 3; grid-row: 3; }
+    </style>
+</head>
+<body>
+    <h1>Bento Grid Focus Effect</h1>
+    <div class="bento-grid">
+        <div class="card customization">
+            <div class="card-content">
+                <h2>CUSTOMIZATION</h2>
+            </div>
+        </div>
+        <div class="card scheduling">
+            <div class="card-content">
+                <h2>SCHEDULING</h2>
+            </div>
+        </div>
+        <div class="card wallet">
+            <div class="card-content">
+                <h2>WALLET</h2>
+            </div>
+        </div>
+        <div class="card inbox">
+            <div class="card-content">
+                <h2>INBOX</h2>
+            </div>
+        </div>
+        <div class="card send-gifts">
+            <div class="card-content">
+                <h2>SEND GIFTS</h2>
+            </div>
+        </div>
+        <div class="card reminders">
+            <div class="card-content">
+                <h2>REMINDERS</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.05)';
+                card.style.zIndex = '1';
+                cards.forEach(otherCard => {
+                    if (otherCard !== card) {
+                        otherCard.style.filter = 'brightness(0.4)';
+                    }
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+                card.style.zIndex = '0';
+                cards.forEach(otherCard => {
+                    otherCard.style.filter = 'brightness(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
